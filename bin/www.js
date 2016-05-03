@@ -9,6 +9,12 @@ var debug = require('debug')('node001:server');
 var http = require('http');
 
 /**
+ * Setup Strompath and MongoDB.
+ */
+var stormpath = require('express-stormpath');
+var mongoose = require('../controllers/DBConnect');
+
+/**
  * Get port from environment and store in Express.
  */
 
@@ -24,8 +30,22 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+ console.log("Initializing stormpath...");
+ app.use(stormpath.init(app, {
+   application: process.env.STORMPATH_APPLICATION_HREF,
+ 	expand: {
+     customData: true,
+   },
+   web: {
+     produces: ['application/json']
+   }
+ }));
 
-server.listen(port);
+ app.on('stormpath.ready',function () {
+   server.listen(port);
+   console.log('Stormpath Ready');
+ });
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -88,4 +108,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log("Listening on " + bind);
+  console.log("-----------------------------------------------------------------");
 }

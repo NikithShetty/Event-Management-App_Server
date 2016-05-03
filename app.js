@@ -4,10 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var stormpath = require('express-stormpath')
-
-//connect to DB
-var mongoose = require('./controllers/DBConnect');
 
 var users = require('./controllers/users');
 var events = require('./controllers/events');
@@ -24,20 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(stormpath.init(app, {
-  application: process.env.STORMPATH_APPLICATION_HREF,
-	expand: {
-    customData: true,
-  },
-  web: {
-    produces: ['application/json']
-  }
-}));
-
-app.on('stormpath.ready',function () {
-  console.log('Stormpath Ready');
-});
 
 //defining routes for the app
 app.get('/', function(req, res, next) {
