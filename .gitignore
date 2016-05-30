@@ -1,4 +1,4 @@
 node_modules
 .idea
 setVar.txt
-startServer.txt
+startServer.bat
