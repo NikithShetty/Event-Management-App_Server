@@ -8,7 +8,7 @@ In this project, there is a singular android application that can be installed o
 The client side code is written in Android, and the server side code is written in Node.js.
 Client side code is hosted here - https://github.com/NikithShetty/Event-Management-App
 
-The server is hosted live on Heroku server - https://gentle-mesa-83442.herokuapp.com/ and the database is hosted on mLab server.The user data management is done using Strompath.
+The api's are hosted live on Heroku server - https://gentle-mesa-83442.herokuapp.com/ and the database is hosted on mLab server.The user data management is done using Strompath.
 
 Server side technologies used : 
 1. Node.js
